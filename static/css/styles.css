@@ -1,0 +1,641 @@
+:root {
+    --bg-1: #0f172a;
+    --bg-2: #1e293b;
+    --bg-3: #0b3b66;
+    --surface: rgba(255, 255, 255, 0.86);
+    --surface-strong: #ffffff;
+    --text: #172033;
+    --muted: #5d6b82;
+    --line: #d8e0ef;
+
+    --student-a: #14b8a6;
+    --student-b: #22c55e;
+    --teacher-a: #0ea5e9;
+    --teacher-b: #2563eb;
+    --admin-a: #f97316;
+    --admin-b: #ef4444;
+
+    --violet: #7c3aed;
+    --rose: #f43f5e;
+    --gold: #f59e0b;
+    --ok: #16a34a;
+    --warn: #d97706;
+    --danger: #dc2626;
+
+    --shadow-lg: 0 20px 45px rgba(15, 23, 42, 0.2);
+    --shadow-md: 0 12px 26px rgba(15, 23, 42, 0.14);
+    --radius-lg: 20px;
+    --radius-md: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    color: var(--text);
+    font-family: "Segoe UI", "Trebuchet MS", "Verdana", sans-serif;
+    background:
+        radial-gradient(1200px 800px at -10% -10%, rgba(244, 63, 94, 0.22), transparent 55%),
+        radial-gradient(1100px 700px at 110% -10%, rgba(14, 165, 233, 0.24), transparent 55%),
+        radial-gradient(900px 650px at 50% 120%, rgba(34, 197, 94, 0.18), transparent 55%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+    background-attachment: fixed;
+    line-height: 1.45;
+}
+
+.auth-shell {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 14px;
+}
+
+.auth-layout {
+    width: min(1120px, 100%);
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+}
+
+.auth-layout-register {
+    grid-template-columns: 0.95fr 1.35fr;
+}
+
+.auth-brand-panel {
+    padding: 36px 32px;
+    color: #fff;
+    background:
+        radial-gradient(500px 300px at 10% 0%, rgba(255, 255, 255, 0.22), transparent 60%),
+        linear-gradient(150deg, #2563eb, #0ea5e9 45%, #14b8a6);
+}
+
+.auth-brand-panel h1 {
+    margin: 14px 0 10px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.auth-brand-panel p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.auth-brand-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.auth-feature-list {
+    margin: 20px 0 0;
+    padding-left: 18px;
+}
+
+.auth-feature-list li {
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.auth-form-panel {
+    padding: 30px 30px 24px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.98));
+}
+
+.auth-form-header p {
+    margin-top: -6px;
+    color: #64748b;
+}
+
+.role-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px;
+    background: #fff;
+}
+
+.role-card h5 {
+    margin: 0 0 10px;
+    font-weight: 700;
+}
+
+.role-card-student {
+    border-left: 5px solid #22c55e;
+}
+
+.role-card-teacher {
+    border-left: 5px solid #2563eb;
+}
+
+.role-card-admin {
+    border-left: 5px solid #ef4444;
+}
+
+.container,
+.login-container,
+.register-container {
+    max-width: 1140px;
+    margin: 24px auto;
+}
+
+.container {
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 26px;
+}
+
+h2,
+h3,
+h4,
+h5,
+label,
+strong {
+    color: var(--text);
+}
+
+a {
+    color: #1d4ed8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* login / register */
+.login-container,
+.register-container {
+    background: linear-gradient(170deg, rgba(255, 255, 255, 0.97), rgba(248, 250, 252, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 30px;
+}
+
+.login-container {
+    max-width: 420px;
+}
+
+.register-container {
+    max-width: 1040px;
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: 0.3px;
+}
+
+.form-label {
+    font-weight: 700;
+    color: #334155;
+}
+
+.form-control,
+.form-select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    min-height: 42px;
+    box-shadow: none;
+}
+
+.form-control:focus,
+.form-select:focus,
+input:focus,
+select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.18);
+}
+
+.btn {
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb, #0ea5e9);
+    border: none;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    border: none;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    border: none;
+}
+
+.btn-outline-secondary {
+    border-radius: 0 12px 12px 0;
+}
+
+/* dashboard header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0 18px;
+    border-bottom: 3px solid var(--line);
+}
+
+.header h2 {
+    margin: 0;
+    font-weight: 800;
+}
+
+.header.admin {
+    border-bottom-color: rgba(239, 68, 68, 0.45);
+}
+
+.header.student {
+    border-bottom-color: rgba(34, 197, 94, 0.45);
+}
+
+.header.teacher {
+    border-bottom-color: rgba(37, 99, 235, 0.45);
+}
+
+.logout-btn {
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    box-shadow: 0 8px 18px rgba(239, 68, 68, 0.25);
+}
+
+.logout-btn:hover {
+    color: #fff;
+    text-decoration: none;
+    filter: brightness(0.95);
+}
+
+/* hero blocks */
+.welcome-section {
+    padding: 22px;
+    border-radius: 16px;
+    margin: 18px 0 22px;
+    color: #fff;
+    box-shadow: var(--shadow-md);
+}
+
+.welcome-section h2,
+.welcome-section p {
+    color: #fff;
+    margin: 0;
+}
+
+.welcome-section p {
+    margin-top: 6px;
+    opacity: 0.95;
+}
+
+.welcome-section.student {
+    background: linear-gradient(135deg, var(--student-a), var(--student-b));
+}
+
+.welcome-section.teacher {
+    background: linear-gradient(135deg, var(--teacher-a), var(--teacher-b));
+}
+
+.welcome-section.admin {
+    background: linear-gradient(135deg, var(--admin-a), var(--admin-b));
+}
+
+/* cards and sections */
+.content {
+    margin-top: 12px;
+}
+
+.section {
+    background: var(--surface-strong);
+    border: 1px solid #e2e8f0;
+    border-left: 6px solid #94a3b8;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: 18px;
+    margin-bottom: 16px;
+}
+
+.admin-section {
+    border-left-color: var(--admin-b);
+}
+
+.student-section {
+    border-left-color: var(--student-b);
+}
+
+.teacher-section {
+    border-left-color: var(--teacher-b);
+}
+
+.section h3 {
+    margin-top: 0;
+    margin-bottom: 14px;
+    font-weight: 800;
+}
+
+/* stats */
+.stats-grid,
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.stat-card,
+.stat-box {
+    background: linear-gradient(180deg, #ffffff, #f8fafc);
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: 16px;
+    text-align: center;
+}
+
+.stat-card h4,
+.stat-box h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+.number {
+    margin-top: 8px;
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+/* tables */
+.table,
+.students-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #dbe5f3;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 8px;
+    background: #fff;
+}
+
+.table thead,
+.students-table thead {
+    background: linear-gradient(135deg, #334155, #1e293b);
+}
+
+.table th,
+.table td,
+.students-table th,
+.students-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #edf2f7;
+    vertical-align: middle;
+}
+
+.table th,
+.students-table th {
+    color: #fff;
+    font-weight: 700;
+}
+
+.table tbody tr:hover,
+.students-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* badges and statuses */
+.role-badge,
+.score-badge,
+.grade-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: #fff;
+}
+
+.role-admin {
+    background: linear-gradient(135deg, #ef4444, #f97316);
+}
+
+.role-teacher {
+    background: linear-gradient(135deg, #2563eb, #0ea5e9);
+}
+
+.role-student {
+    background: linear-gradient(135deg, #16a34a, #14b8a6);
+}
+
+.score-excellent,
+.grade-A,
+.grade-a {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+.score-good,
+.grade-B,
+.grade-b {
+    background: linear-gradient(135deg, #0ea5e9, #2563eb);
+}
+
+.score-average,
+.grade-C,
+.grade-c {
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+}
+
+.score-poor,
+.grade-D,
+.grade-d {
+    background: linear-gradient(135deg, #f97316, #ef4444);
+}
+
+.score-fail,
+.grade-F,
+.grade-f {
+    background: linear-gradient(135deg, #b91c1c, #7f1d1d);
+}
+
+.status-submitted {
+    background: var(--ok);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.status-pending {
+    background: var(--warn);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+/* teacher blocks */
+.student-card {
+    border: 1px solid #dbe5f3;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 14px;
+    background: linear-gradient(180deg, #ffffff, #f8fbff);
+}
+
+.student-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.student-name {
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.student-email {
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.progress-section,
+.grades-section {
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 24px;
+    background: #e6edf7;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 6px 0 10px;
+}
+
+.progress-fill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(135deg, #06b6d4, #2563eb);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+/* home fallback page */
+body > h2,
+body > a {
+    display: block;
+    max-width: 600px;
+    margin: 28px auto 0;
+    color: #fff;
+    text-align: center;
+}
+
+body > a {
+    width: 150px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    color: #fff;
+}
+
+.no-data {
+    text-align: center;
+    color: var(--muted);
+    font-style: italic;
+    padding: 12px;
+}
+
+/* responsive */
+@media (max-width: 992px) {
+    .stats-grid,
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .student-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .auth-layout,
+    .auth-layout-register {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-brand-panel {
+        padding: 22px 20px;
+    }
+
+    .auth-form-panel {
+        padding: 20px 16px;
+    }
+
+    .container,
+    .login-container,
+    .register-container {
+        margin: 12px;
+        width: auto;
+        max-width: none;
+    }
+
+    .container {
+        padding: 14px;
+    }
+
+    .stats-grid,
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .table,
+    .students-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

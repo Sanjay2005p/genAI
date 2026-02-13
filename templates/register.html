@@ -1,137 +1,204 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Register</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .register-container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 14px;
-            background-color: white;
-        }
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="password"]:focus,
-        select:focus {
-            outline: none;
-            border-color: #4CAF50;
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .login-link {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .login-link a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-        .error {
-            color: #d32f2f;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | EduPortal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <div class="register-container">
-        <h2>Create Account</h2>
-        <form method="POST" action="{{ url_for('register') }}">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
+    <main class="auth-shell">
+        <section class="auth-layout auth-layout-register">
+            <aside class="auth-brand-panel">
+                <div class="auth-brand-badge">EduPortal</div>
+                <h1>Create your account</h1>
+                <p>Build a complete profile to unlock personalized access for admin, teacher, or student roles.</p>
+                <ul class="auth-feature-list">
+                    <li>Smart role-based onboarding</li>
+                    <li>Centralized academic dashboards</li>
+                    <li>Structured profile details from day one</li>
+                </ul>
+            </aside>
 
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
+            <section class="auth-form-panel">
+                <div class="auth-form-header">
+                    <h2 class="login-title">Register</h2>
+                    <p>Fill in your details to set up a new account.</p>
+                </div>
 
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="mb-3">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ 'danger' if category == 'danger' else category }}" role="alert">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
 
-            <div class="form-group">
-                <label for="confirm_password">Confirm Password:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </div>
+                <form method="POST" action="{{ url_for('register') }}" novalidate>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" value="{{ form_data.username if form_data else '' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fullname" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="fullname" name="fullname" value="{{ form_data.fullname if form_data else '' }}" required>
+                        </div>
 
-            <div class="form-group">
-                <label for="role">Select Role:</label>
-                <select id="role" name="role" required>
-                    <option value="">-- Select Role --</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="student">Student</option>
-                </select>
-            </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ form_data.email if form_data else '' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dob" class="form-label">Date of Birth</label>
+                            <input type="date" id="dob" name="dob" class="form-control" value="{{ form_data.dob if form_data else '' }}">
+                        </div>
 
-            <button type="submit">Register</button>
+                        <div class="col-md-6">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password" minlength="6" required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password', this)">Show</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" minlength="6" required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('confirm_password', this)">Show</button>
+                            </div>
+                        </div>
 
-            <div class="login-link">
-                Already have an account? <a href="{{ url_for('login') }}">Login</a>
-            </div>
-        </form>
-    </div>
+                        <div class="col-md-6">
+                            <label for="role" class="form-label">Select Role</label>
+                            <select id="role" name="role" class="form-select" required onchange="toggleRoleSections()">
+                                <option value="">-- Select Role --</option>
+                                <option value="teacher" {% if form_data and form_data.role == 'teacher' %}selected{% endif %}>Teacher</option>
+                                <option value="student" {% if form_data and form_data.role == 'student' %}selected{% endif %}>Student</option>
+                                <option value="admin" {% if form_data and form_data.role == 'admin' %}selected{% endif %}>Admin</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="student-section" class="role-card role-card-student mt-3" style="display:none;">
+                        <h5>Student Details</h5>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Roll Number</label>
+                                <input type="text" name="roll_number" class="form-control" value="{{ form_data.roll_number if form_data else '' }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Department</label>
+                                <input type="text" name="department" class="form-control" value="{{ form_data.department if form_data else '' }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Year / Semester</label>
+                                <input type="text" name="year_semester" class="form-control" value="{{ form_data.year_semester if form_data else '' }}" placeholder="e.g. 3 / Sem 6">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Phone Number</label>
+                                <input type="text" name="phone" class="form-control" value="{{ form_data.phone if form_data else '' }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Gender</label>
+                                <select name="gender" class="form-select">
+                                    <option value="">--</option>
+                                    <option value="Male" {% if form_data and form_data.gender == 'Male' %}selected{% endif %}>Male</option>
+                                    <option value="Female" {% if form_data and form_data.gender == 'Female' %}selected{% endif %}>Female</option>
+                                    <option value="Other" {% if form_data and form_data.gender == 'Other' %}selected{% endif %}>Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Grade / Class</label>
+                                <input type="text" name="grade" class="form-control" value="{{ form_data.grade if form_data else '' }}" placeholder="e.g. 10-A">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="teacher-section" class="role-card role-card-teacher mt-3" style="display:none;">
+                        <h5>Teacher Details</h5>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Employee ID</label>
+                                <input type="text" name="employee_id" class="form-control" value="{{ form_data.employee_id if form_data else '' }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Department</label>
+                                <input type="text" name="department" class="form-control" value="{{ form_data.department if form_data else '' }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Subject</label>
+                                <input type="text" name="subject" class="form-control" value="{{ form_data.subject if form_data else '' }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Phone Number</label>
+                                <input type="text" name="phone" class="form-control" value="{{ form_data.phone if form_data else '' }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Qualification</label>
+                                <input type="text" name="qualification" class="form-control" value="{{ form_data.qualification if form_data else '' }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Experience (Years)</label>
+                                <input type="text" name="experience" class="form-control" value="{{ form_data.experience if form_data else '' }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="admin-section" class="role-card role-card-admin mt-3" style="display:none;">
+                        <h5>Admin Details</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Admin ID</label>
+                                <input type="text" name="admin_identifier" class="form-control" value="{{ form_data.admin_identifier if form_data else '' }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Phone Number</label>
+                                <input type="text" name="phone" class="form-control" value="{{ form_data.phone if form_data else '' }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-success btn-lg">Create Account</button>
+                    </div>
+
+                    <div class="register-link text-center mt-3">
+                        Already have an account? <a href="{{ url_for('login') }}">Sign in</a>
+                    </div>
+                </form>
+            </section>
+        </section>
+    </main>
+
+    <script>
+        function togglePassword(fieldId, button) {
+            const field = document.getElementById(fieldId);
+            const reveal = field.type === 'password';
+            field.type = reveal ? 'text' : 'password';
+            button.textContent = reveal ? 'Hide' : 'Show';
+        }
+
+        function setSectionState(sectionId, active) {
+            const section = document.getElementById(sectionId);
+            section.style.display = active ? 'block' : 'none';
+            section.querySelectorAll('input, select, textarea').forEach((el) => {
+                el.disabled = !active;
+            });
+        }
+
+        function toggleRoleSections() {
+            const role = document.getElementById('role').value;
+            setSectionState('student-section', role === 'student');
+            setSectionState('teacher-section', role === 'teacher');
+            setSectionState('admin-section', role === 'admin');
+        }
+
+        toggleRoleSections();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
